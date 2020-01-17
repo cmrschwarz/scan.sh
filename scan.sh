@@ -7,7 +7,7 @@ filename=""
 while [ $# -gt 0 ]; do
     if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
         cat << ________EOF
-scan.sh [-h/--help] [-png] [-p output_path] [-d output_dir] [-f file_name]
+scan.sh [-h/--help] [-png] [-f file_name] [-d output_dir] [-p output_path]
     -h --help           print this help and exit
     -f file_name        override the filename (%d for page number)
     -d output_dir       place output in output_dir
@@ -72,7 +72,7 @@ if [ "$outpath" = "" ]; then
     fi
     outpath="$dirname/$filename"
 fi
-scanimage_cmd='scanimage -B --progress --mode "Color" --source "ADF Duplex" --resolution 300 -d "canon_dr:libusb:001:005" --format png --swcrop=yes --swskip 1 --rollerdeskew=yes --buffermode=yes'
+scanimage_cmd='scanimage -B --mode "Color" --source "ADF Duplex" --resolution 300 -d "canon_dr:libusb:001:005" --format png --swcrop=yes --swskip 1 --rollerdeskew=yes --buffermode=yes'
 if $pdf; then
     dir="$(mktemp -d)"
     sh -c "$scanimage_cmd --batch=\"$dir/%d.png\""
